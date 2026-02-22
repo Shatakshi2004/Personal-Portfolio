@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shatakshi Pattanaik – Software Developer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Fira+Code:wght@300;400&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060610;--surface:#0d0d1f;--border:#1e1e3a;
+  --cyan:#00f5d4;--purple:#7c3aed;--pink:#f72585;
+  --text:#e2e8f0;--muted:#64748b;--card:#0f0f20;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Fira Code',Consolas,'Courier New',monospace;
+  overflow-x:hidden;min-height:100vh;
+}
+
+/* grid bg */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(0,245,212,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,245,212,.03) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;
+}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 2.5rem;
+  background:rgba(6,6,16,.95);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Syne',system-ui,sans-serif;
+  font-weight:800;font-size:1.2rem;color:var(--cyan);
+}
+.logo span{color:var(--pink)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;transition:color .3s;
+}
+.nav-links a:hover{color:var(--cyan)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:88vh;display:flex;align-items:center;
+  padding:5rem 2.5rem 3rem;gap:2rem;flex-wrap:wrap;
+}
+.hero-left{flex:1;min-width:280px}
+.badge{
+  display:inline-block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--cyan);border:1px solid rgba(0,245,212,.3);
+  padding:.3rem .9rem;border-radius:2px;margin-bottom:1.5rem;
+  animation:fadeUp .6s ease both;
+}
+h1{
+  font-family:'Syne',system-ui,sans-serif;
+  font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;
+  line-height:1.05;letter-spacing:-.03em;margin-bottom:.8rem;
+  animation:fadeUp .6s .1s ease both;
+}
+.grad{
+  display:block;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.role{font-size:.85rem;color:var(--muted);margin-bottom:1.2rem;animation:fadeUp .6s .2s ease both}
+.role em{color:var(--cyan);font-style:normal}
+.bio{
+  font-size:.85rem;color:rgba(226,232,240,.6);
+  max-width:420px;line-height:1.85;margin-bottom:2rem;
+  animation:fadeUp .6s .3s ease both;
+}
+.btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .6s .4s ease both}
+
+.btn-p{
+  padding:.75rem 1.8rem;background:var(--cyan);color:#060610;border:none;
+  font-family:'Syne',system-ui,sans-serif;font-weight:700;font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  display:inline-block;transition:all .3s;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.btn-p:hover{background:var(--pink);transform:translateY(-2px);box-shadow:0 8px 30px rgba(247,37,133,.4)}
+.btn-s{
+  padding:.75rem 1.8rem;background:transparent;color:var(--text);
+  border:1px solid var(--border);font-family:'Syne',system-ui,sans-serif;
+  font-weight:600;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;display:inline-block;transition:all .3s;
+}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* code card */
+.code-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.2rem;font-size:.72rem;line-height:1.8;color:var(--muted);
+  min-width:240px;max-width:270px;flex-shrink:0;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  animation:fadeRight .8s .5s ease both;position:relative;
+}
+.code-card::before{
+  content:'';position:absolute;inset:-1px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(0,245,212,.2),transparent,rgba(124,58,237,.2));z-index:-1;
+}
+.dots{display:flex;gap:5px;margin-bottom:.8rem}
+.dots span{width:9px;height:9px;border-radius:50%}
+.dots span:nth-child(1){background:#ff5f57}
+.dots span:nth-child(2){background:#febc2e}
+.dots span:nth-child(3){background:#28c840}
+.ck{color:#a78bfa}.cf{color:var(--cyan)}.cs{color:#fcd34d}.cc{color:var(--muted);font-style:italic}
+
+/* ── STATS ── */
+.stats{
+  position:relative;z-index:1;display:flex;gap:3rem;flex-wrap:wrap;
+  padding:1.5rem 2.5rem;background:var(--surface);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.stats::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);
+}
+.snum{font-family:'Syne',system-ui,sans-serif;font-size:1.8rem;font-weight:800;color:var(--cyan);line-height:1}
+.slbl{font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1;padding:4rem 2.5rem}
+.sh{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem}
+.sn{font-size:.65rem;color:var(--pink);letter-spacing:.2em;font-family:'Fira Code',monospace}
+.st{font-family:'Syne',system-ui,sans-serif;font-size:1.9rem;font-weight:800;letter-spacing:-.02em}
+.sl{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+
+/* ── SKILLS ── */
+#skills{background:var(--surface)}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.2rem}
+.sc{
+  background:var(--card);border:1px solid var(--border);
+  padding:1.5rem;border-radius:4px;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.sc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple));
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.sc:hover{border-color:rgba(0,245,212,.3);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.sc:hover::before{transform:scaleX(1)}
+.si{font-size:1.5rem;margin-bottom:.7rem}
+.sname{font-family:'Syne',system-ui,sans-serif;font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.sdesc{font-size:.7rem;color:var(--muted);line-height:1.6;margin-bottom:.9rem}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.tag{
+  font-size:.58rem;padding:.15rem .5rem;
+  border:1px solid var(--border);color:var(--muted);border-radius:2px;transition:all .2s;
+}
+.sc:hover .tag{border-color:rgba(0,245,212,.35);color:var(--cyan)}
+
+/* ── PROJECTS ── */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem}
+.pc{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;transition:all .4s;
+}
+.pc:hover{transform:translateY(-5px);box-shadow:0 25px 50px rgba(0,0,0,.5);border-color:rgba(0,245,212,.25)}
+.pi{
+  height:130px;display:flex;align-items:center;
+  justify-content:center;font-size:2.4rem;position:relative;
+}
+.pi::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,var(--card),transparent);
+}
+.p1{background:linear-gradient(135deg,#0d0d1f,#1a0533)}
+.p2{background:linear-gradient(135deg,#0d1f1a,#031a14)}
+.p3{background:linear-gradient(135deg,#1f0d10,#33050b)}
+.pb{padding:1.3rem}
+.pt{font-size:.58rem;color:var(--pink);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.4rem}
+.pn{font-family:'Syne',system-ui,sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.pd{font-size:.72rem;color:var(--muted);line-height:1.7;margin-bottom:.9rem}
+.pl{display:flex;gap:1rem;margin-top:.4rem}
+.pl a{
+  font-size:.62rem;color:var(--cyan);text-decoration:none;
+  letter-spacing:.1em;text-transform:uppercase;transition:color .2s;
+}
+.pl a:hover{color:var(--pink)}
+
+/* ── SOFT SKILLS ── */
+#softskills{background:var(--surface)}
+.softg{display:flex;flex-wrap:wrap;gap:1rem}
+.pill{
+  background:var(--card);border:1px solid var(--border);
+  padding:.6rem 1.2rem;border-radius:999px;
+  font-size:.75rem;color:var(--muted);
+  display:flex;align-items:center;gap:.5rem;transition:all .3s;
+}
+.pill:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 15px rgba(0,245,212,.1)}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg)}
+.cw{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.ctitle{font-family:'Syne',system-ui,sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.8rem;letter-spacing:-.02em}
+.csub{font-size:.78rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem}
+.socs{display:flex;flex-direction:column;gap:.4rem}
+.socl{
+  display:flex;align-items:center;gap:.8rem;text-decoration:none;
+  color:var(--muted);font-size:.75rem;padding:.4rem 0;
+  border-bottom:1px solid var(--border);transition:color .3s;
+}
+.socl:hover{color:var(--cyan)}
+.cf2{display:flex;flex-direction:column;gap:.8rem}
+.fg{display:flex;flex-direction:column;gap:.3rem}
+.fg label{font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.fg input,.fg textarea{
+  background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:.7rem .9rem;font-family:inherit;font-size:.8rem;
+  border-radius:2px;outline:none;transition:border-color .3s;resize:none;
+}
+.fg input:focus,.fg textarea:focus{border-color:var(--cyan)}
+.fg textarea{height:100px}
+
+footer{
+  position:relative;z-index:1;text-align:center;
+  padding:1.5rem;border-top:1px solid var(--border);
+  font-size:.65rem;color:var(--muted);letter-spacing:.08em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:800px){
+  .code-card{display:none}
+  .cw{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:520px){
+  nav{padding:1rem 1.2rem}
+  .hero,.stats{padding-left:1.2rem;padding-right:1.2rem}
+  section{padding:3rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Shatakshi<span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="badge">// Open to Opportunities</div>
+    <h1>Shatakshi Pattanaik<span class="grad">Software Developer</span></h1>
+    <p class="role"><em>Python</em> · Java · HTML/CSS/JS · MySQL · Git</p>
+    <p class="bio">A creative and adaptable developer passionate about building intuitive web experiences and solving real-world problems through clean, purposeful code.</p>
+    <div class="btns">
+      <a href="#projects" class="btn-p">View Projects</a>
+      <a href="#contact" class="btn-s">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="code-card">
+    <div class="dots"><span></span><span></span><span></span></div>
+    <div><span class="cc"># about.py</span></div>
+    <br>
+    <div><span class="ck">dev</span> = {</div>
+    <div>&nbsp;&nbsp;<span class="cs">"name"</span>: <span class="cf">"Shatakshi"</span>,</div>
+    <div>&nbsp;&nbsp;<span class="cs">"role"</span>: <span class="cf">"Software Dev"</span>,</div>
+    <div>&nbsp;&nbsp;<span class="cs">"stack"</span>: [</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">"Python"</span>, <span class="cf">"Java"</span>,</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cf">"HTML/CSS/JS"</span></div>
+    <div>&nbsp;&nbsp;],</div>
+    <div>&nbsp;&nbsp;<span class="cs">"open"</span>: <span class="ck">True</span></div>
+    <div>}</div>
+    <br>
+    <div><span class="cc"># ready to build ✓</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div><div class="snum">3</div><div class="slbl">Projects Built</div></div>
+  <div><div class="snum">5+</div><div class="slbl">Technologies</div></div>
+  <div><div class="snum">2</div><div class="slbl">Languages</div></div>
+  <div><div class="snum">100%</div><div class="slbl">Passion</div></div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sh">
+    <span class="sn">01</span>
+    <h2 class="st">Tech Stack</h2>
+    <div class="sl"></div>
+  </div>
+  <div class="sg">
+    <div class="sc reveal">
+      <div class="si">🌐</div>
+      <div class="sname">Web Technologies</div>
+      <p class="sdesc">Crafting responsive, accessible UIs using modern web standards.</p>
+      <div class="tags">
+        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+        <span class="tag">Bootstrap</span><span class="tag">Flexbox</span><span class="tag">Grid</span><span class="tag">Media Query</span>
+      </div>
+    </div>
+    <div class="sc reveal">
+      <div class="si">💻</div>
+      <div class="sname">Programming</div>
+      <p class="sdesc">Building backend logic and REST APIs with Python and Java.</p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Java</span>
+        <span class="tag">Node.js</span><span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="sc reveal">
+      <div class="si">🗄️</div>
+      <div class="sname">Database &amp; Storage</div>
+      <p class="sdesc">Designing and querying structured databases for real applications.</p>
+      <div class="tags">
+        <span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">JSON</span>
+      </div>
+    </div>
+    <div class="sc reveal">
+      <div class="si">🛠️</div>
+      <div class="sname">Tools &amp; Platforms</div>
+      <p class="sdesc">Version control, collaboration, and bot deployment workflows.</p>
+      <div class="tags">
+        <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Discord Dev Portal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sh">
+    <span class="sn">02</span>
+    <h2 class="st">Projects</h2>
+    <div class="sl"></div>
+  </div>
+  <div class="pg">
+
+    <div class="pc reveal">
+      <div class="pi p1">🔔</div>
+      <div class="pb">
+        <div class="pt">Productivity · Web App</div>
+        <div class="pn">Mindful Notification System</div>
+        <p class="pd">A productivity web system enabling users to manage notifications across multiple priority modes using AI-assisted classification. Built the full frontend experience.</p>
+        <div class="tags" style="margin-bottom:.8rem">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
+          <span class="tag">Node.js</span><span class="tag">SQL</span><span class="tag">REST API</span>
+        </div>
+        <div class="pl">
+          <a href="https://github.com/Shatakshi2004/Mindful" target="_blank">→ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc reveal">
+      <div class="pi p2">📚</div>
+      <div class="pb">
+        <div class="pt">Education · Web App</div>
+        <div class="pn">ClassPilot</div>
+        <p class="pd">Helps students and career switchers create realistic, personalized study plans based on their goals, available time, and skill level.</p>
+        <div class="tags" style="margin-bottom:.8rem">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
+          <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">JSON</span>
+        </div>
+        <div class="pl">
+          <a href="https://github.com/Shatakshi2004/ClassPilot" target="_blank">→ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pc reveal">
+      <div class="pi p3">🤖</div>
+      <div class="pb">
+        <div class="pt">Bot · Python</div>
+        <div class="pn">Discord Chatbot</div>
+        <p class="pd">A simple and interactive Discord bot built with Python using discord.py and requests library, deployed via the Discord Developer Portal.</p>
+        <div class="tags" style="margin-bottom:.8rem">
+          <span class="tag">Python</span><span class="tag">discord.py</span>
+          <span class="tag">requests</span><span class="tag">JSON</span>
+        </div>
+        <div class="pl">
+          <a href="https://github.com/Shatakshi2004/Botbot-works" target="_blank">→ GitHub</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOFT SKILLS -->
+<section id="softskills">
+  <div class="sh">
+    <span class="sn">03</span>
+    <h2 class="st">Soft Skills</h2>
+    <div class="sl"></div>
+  </div>
+  <div class="softg">
+    <div class="pill reveal">🤝 Teamwork</div>
+    <div class="pill reveal">🔄 Adaptability</div>
+    <div class="pill reveal">🎨 Creativity</div>
+    <div class="pill reveal">📋 Organisational Skills</div>
+    <div class="pill reveal">💬 Communication</div>
+    <div class="pill reveal">🧩 Problem Solving</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sh">
+    <span class="sn">04</span>
+    <h2 class="st">Contact</h2>
+    <div class="sl"></div>
+  </div>
+  <div class="cw">
+    <div class="reveal">
+      <div class="ctitle">Let's build<br>something amazing.</div>
+      <p class="csub">Open to internships, fresher roles, and interesting collaborations. Drop a message and I'll get back to you soon!</p>
+      <div class="socs">
+        <a href="https://github.com/Shatakshi2004" class="socl" target="_blank">🐙 github.com/Shatakshi2004</a>
+        <a href="https://www.linkedin.com/in/shatakshi-pattanaik/" class="socl" target="_blank">💼 linkedin.com/in/shatakshi-pattanaik</a>
+        <a href="https://x.com/ShatakshiP6647" class="socl" target="_blank">🐦 @ShatakshiP6647</a>
+        <a href="mailto:shatakshipattanaik@gmail.com" class="socl">✉️ shatakshipattanaik@gmail.com</a>
+      </div>
+    </div>
+    <form class="cf2 reveal" onsubmit="return false">
+      <div class="fg"><label>Name</label><input type="text" placeholder="Your name"></div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Message</label><textarea placeholder="Tell me about the opportunity..."></textarea></div>
+      <button type="submit" class="btn-p" style="width:fit-content;border:none">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<footer>Designed &amp; Built by Shatakshi Pattanaik &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; All rights reserved</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
